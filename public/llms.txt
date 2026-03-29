@@ -1,51 +1,73 @@
-# Business — Generative Engine Optimization Map
+# Fix Design — Generative Engine Optimization Map
+
+> Fix Design is a premium signage and branding solutions company based in Netanya, Israel, with over 20 years of industry experience. The brand exudes confidence, professionalism, and craftsmanship, offering a full spectrum of services from outdoor billboards and 3D illuminated signs to vehicle branding and construction site fencing. Their identity is built on trust, quality without compromise, and personalized service — guiding clients from the initial concept all the way through on-site installation. The visual brand language is bold and dynamic, combining vibrant pink, blue, and yellow against clean black and white backgrounds to create a striking, modern aesthetic that commands attention.
 
 ---
 
 ## Pages
 
 ### בית
-https://example.com
+https://fix-design.zappy5.app
 Fix Design נתניה: מעל 20 שנות ניסיון בשילוט, מיתוג רכבים ועיצוב גרפי. מהרעיון ועד ההתקנה — אנחנו בונים את הנוכחות החזותית של העסק שלך. צור קשר עוד היום!
 
 ### שירותים
-https://example.com/services
+https://fix-design.zappy5.app/services
 שלטי תאורה תלת-ממדיים, מיתוג רכבים, גדרות אתרי בנייה ושלטי חוצות — Fix Design מציעה מגוון שלם של שירותי שילוט ומיתוג בסטנדרט פרימיום. גלה את כל השירותים שלנו!
 
 ### תיק עבודות
-https://example.com/portfolio
+https://fix-design.zappy5.app/portfolio
 מאות פרויקטים של שילוט ומיתוג רכבים שהפכו עסקים לבולטים. תיק העבודות של Fix Design מציג את הטוב ביותר שיצא מהסטודיו שלנו — השראה שתהפוך לפרויקט הבא שלך.
 
 ### אודות
-https://example.com/about
+https://fix-design.zappy5.app/about
 Fix Design נוסדה מתוך תשוקה לאיכות ומקצועיות ללא פשרות. הכר את הצוות שמאחורי שלטי החוצות, המיתוג והעיצוב שמשנים את פני העסקים בישראל מזה למעלה מ-20 שנה.
 
 ### צור קשר
-https://example.com/contact
+https://fix-design.zappy5.app/contact
 רוצה שלט חוצות מרשים או מיתוג רכבים שמושך עיניים? צוות Fix Design בנתניה מחכה לשמוע ממך. השאר פרטים עכשיו וקבל ייעוץ מקצועי ללא עלות — כי המיתוג שלך לא יכול לחכות.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://fix-design.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://fix-design.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://fix-design.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About Fix Design
+Fix Design is a premium signage and branding solutions company based in Netanya, Israel, with over 20 years of industry experience. The brand exudes confidence, professionalism, and craftsmanship, offering a full spectrum of services from outdoor billboards and 3D illuminated signs to vehicle branding and construction site fencing. Their identity is built on trust, quality without compromise, and personalized service — guiding clients from the initial concept all the way through on-site installation. The visual brand language is bold and dynamic, combining vibrant pink, blue, and yellow against clean black and white backgrounds to create a striking, modern aesthetic that commands attention.
+
+## Services/Products
+- שלטי חוצות
+- שלטים תלת מימד מוארים ולא מוארים
+- שלטי פוליגל
+- שלטי PVC
+- מיתוג רכבים
+- מדבקות ויניל לחנויות
+- מיתוג זכוכיות
+- שמשוניות
+- סוככים
+- גידור לאתרי בנייה
+
+## Target Audience
+עסקים המחפשים פתרונות שילוט ומיתוג
+
+## Industry
+שילוט, מיתוג ועיצוב גרפי
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://fix-design.zappy5.app/sitemap.xml
+- **Robots.txt**: https://fix-design.zappy5.app/robots.txt
