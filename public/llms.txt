@@ -1,0 +1,51 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### בית
+https://example.com
+Fix Design נתניה: מעל 20 שנות ניסיון בשילוט, מיתוג רכבים ועיצוב גרפי. מהרעיון ועד ההתקנה — אנחנו בונים את הנוכחות החזותית של העסק שלך. צור קשר עוד היום!
+
+### שירותים
+https://example.com/services
+שלטי תאורה תלת-ממדיים, מיתוג רכבים, גדרות אתרי בנייה ושלטי חוצות — Fix Design מציעה מגוון שלם של שירותי שילוט ומיתוג בסטנדרט פרימיום. גלה את כל השירותים שלנו!
+
+### תיק עבודות
+https://example.com/portfolio
+מאות פרויקטים של שילוט ומיתוג רכבים שהפכו עסקים לבולטים. תיק העבודות של Fix Design מציג את הטוב ביותר שיצא מהסטודיו שלנו — השראה שתהפוך לפרויקט הבא שלך.
+
+### אודות
+https://example.com/about
+Fix Design נוסדה מתוך תשוקה לאיכות ומקצועיות ללא פשרות. הכר את הצוות שמאחורי שלטי החוצות, המיתוג והעיצוב שמשנים את פני העסקים בישראל מזה למעלה מ-20 שנה.
+
+### צור קשר
+https://example.com/contact
+רוצה שלט חוצות מרשים או מיתוג רכבים שמושך עיניים? צוות Fix Design בנתניה מחכה לשמוע ממך. השאר פרטים עכשיו וקבל ייעוץ מקצועי ללא עלות — כי המיתוג שלך לא יכול לחכות.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt
