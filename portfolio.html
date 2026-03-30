@@ -954,6 +954,460 @@
   </div>
 </section>
 
+<!-- ===== PORTFOLIO LIGHTBOX ===== -->
+<div id="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="גלריית תמונות" class="plb-hidden" style="display:none !important;">
+  <div class="plb-backdrop"></div>
+  <div class="plb-modal">
+    <button class="plb-close" aria-label="סגור">&times;</button>
+    <div class="plb-header">
+      <span class="plb-category-badge"></span>
+      <h3 class="plb-title"></h3>
+      <p class="plb-desc"></p>
+    </div>
+    <div class="plb-main-img-wrap">
+      <button class="plb-nav plb-prev" aria-label="הקודם">&#8249;</button>
+      <div class="plb-main-img-container">
+        <img class="plb-main-img" src="" alt="" />
+        <div class="plb-img-counter"></div>
+      </div>
+      <button class="plb-nav plb-next" aria-label="הבא">&#8250;</button>
+    </div>
+    <div class="plb-thumbs"></div>
+  </div>
+</div>
+
+<style>
+/* ===== LIGHTBOX STYLES ===== */
+#portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+#portfolio-lightbox.plb-hidden { display: none !important; }
+
+.plb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.plb-modal {
+  position: relative;
+  z-index: 1;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px 28px 24px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  direction: rtl;
+  text-align: right;
+}
+
+.plb-close {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.2s;
+  padding: 0;
+}
+.plb-close:hover { background: #F72585; }
+
+.plb-header { margin-bottom: 18px; }
+
+.plb-category-badge {
+  display: inline-block;
+  background: #F72585;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.plb-title {
+  color: #fafaf7;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.plb-desc {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0;
+}
+
+.plb-main-img-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.plb-main-img-container {
+  flex: 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  line-height: 0;
+}
+
+.plb-main-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  transition: opacity 0.25s ease;
+}
+
+.plb-img-counter {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  direction: ltr;
+}
+
+.plb-nav {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+.plb-nav:hover { background: #F72585; transform: scale(1.08); }
+.plb-nav:disabled { opacity: 0.25; cursor: default; }
+.plb-nav.plb-prev { order: -1; }
+
+.plb-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.plb-thumb {
+  width: 72px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.65;
+  transition: opacity 0.2s, border-color 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+.plb-thumb:hover { opacity: 1; transform: scale(1.05); }
+.plb-thumb.active { border-color: #F72585; opacity: 1; }
+
+/* Card click cursor */
+.portfolio-tile { cursor: pointer; }
+.portfolio-tile:hover .portfolio-tile-image-wrap img,
+.portfolio-tile:hover .portfolio-tile-image-wrap [data-zappy-zoom-wrapper] img { filter: brightness(0.88); }
+.portfolio-tile-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: background 0.25s;
+  pointer-events: none;
+  z-index: 2;
+}
+.portfolio-tile:hover .portfolio-tile-image-wrap::after {
+  background: rgba(247,37,133,0.12);
+}
+.portfolio-tile-image-wrap { position: relative; }
+
+/* Add zoom icon on hover */
+.portfolio-tile-image-wrap .plb-zoom-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background: rgba(247,37,133,0.9);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 3;
+  pointer-events: none;
+}
+.portfolio-tile:hover .plb-zoom-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 600px) {
+  .plb-modal { padding: 20px 14px 18px; }
+  .plb-main-img { height: 240px; }
+  .plb-nav { width: 36px; height: 36px; font-size: 24px; }
+  .plb-thumb { width: 56px; height: 40px; }
+}
+</style>
+
+<script>
+(function() {
+  // ===== GALLERY DATA per tile index =====
+  // Each key = data-grid-item-index of the .portfolio-tile
+  // images: array of { src, alt, caption }
+  // Replace src values with your actual image URLs!
+  var GALLERY_DATA = {
+    0: {
+      category: 'שלטים מוארים',
+      title: 'שלט תלת מימד מואר',
+      desc: 'חנות קוסמטיקה — תוצאה: עלייה של 40% בנראות',
+      images: [
+        { src: 'assets/site-service-gallery-image-1-1774812024182-crmhcf.webp', alt: 'שלט תלת מימד מואר — חנות קוסמטיקה' },
+        { src: 'assets/site-service-gallery-image-1-1774812024182-crmhcf.webp', alt: 'שלט תלת מימד מואר — זווית נוספת' },
+        { src: 'assets/site-service-gallery-image-1-1774812024182-crmhcf.webp', alt: 'שלט תלת מימד מואר — לילה' }
+      ]
+    },
+    1: {
+      category: 'מיתוג רכבים',
+      title: 'מיתוג ניידת עסקית',
+      desc: 'חברת שירותים — מיתוג מלא לצי רכבים',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-2.webp', alt: 'מיתוג ניידת עסקית — צד שמאל' },
+        { src: 'assets/site-portfolio-gallery-image-2.webp', alt: 'מיתוג ניידת עסקית — צד ימין' },
+        { src: 'assets/site-portfolio-gallery-image-2.webp', alt: 'מיתוג ניידת עסקית — פנים' }
+      ]
+    },
+    2: {
+      category: 'שלטי חוצות',
+      title: 'שלט חוצות גדול פורמט',
+      desc: 'קמפיין פרסומי — חשיפה יומית של 50,000 נהגים',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-3.webp', alt: 'שלט חוצות — יום' },
+        { src: 'assets/site-portfolio-gallery-image-3.webp', alt: 'שלט חוצות — לילה' },
+        { src: 'assets/site-portfolio-gallery-image-3.webp', alt: 'שלט חוצות — קרוב' }
+      ]
+    },
+    3: {
+      category: 'מיתוג זכוכיות',
+      title: 'ויניל ומיתוג חלונות ראווה',
+      desc: 'בוטיק אופנה — זהות ויזואלית מחוזקת',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-4.webp', alt: 'ויניל חלונות ראווה — כניסה' },
+        { src: 'assets/site-portfolio-gallery-image-4.webp', alt: 'ויניל חלונות ראווה — פנים' },
+        { src: 'assets/site-portfolio-gallery-image-4.webp', alt: 'ויניל חלונות ראווה — לוגו' }
+      ]
+    },
+    4: {
+      category: 'גידור אתרי בנייה',
+      title: 'גידור ממותג לאתר בנייה',
+      desc: 'קבלן ראשי — מיתוג פרויקט נדל"ן יוקרתי',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-5.webp', alt: 'גידור ממותג — חזית' },
+        { src: 'assets/site-portfolio-gallery-image-5.webp', alt: 'גידור ממותג — פינה' },
+        { src: 'assets/site-portfolio-gallery-image-5.webp', alt: 'גידור ממותג — פרט' }
+      ]
+    },
+    5: {
+      category: 'שלטים תלת מימד',
+      title: 'אותיות תלת מימד מתכת',
+      desc: 'מסעדה — מראה יוקרתי ומקצועי',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-6.webp', alt: 'אותיות תלת מימד מתכת — יום' },
+        { src: 'assets/site-portfolio-gallery-image-6.webp', alt: 'אותיות תלת מימד מתכת — זווית' },
+        { src: 'assets/site-portfolio-gallery-image-6.webp', alt: 'אותיות תלת מימד מתכת — קרוב' }
+      ]
+    },
+    6: {
+      category: 'שלטי PVC',
+      title: 'שלטי PVC למשרדים',
+      desc: 'חברת הייטק — מיתוג פנים מקצועי',
+      images: [
+        { src: 'assets/site-service-gallery-image-7-1774812632702-omtzki.webp', alt: 'שלטי PVC — כניסה' },
+        { src: 'assets/site-service-gallery-image-7-1774812632702-omtzki.webp', alt: 'שלטי PVC — מסדרון' },
+        { src: 'assets/site-service-gallery-image-7-1774812632702-omtzki.webp', alt: 'שלטי PVC — פרט' }
+      ]
+    },
+    7: {
+      category: 'סוככים',
+      title: 'סוכך ממותג לבית קפה',
+      desc: 'רשת קפה — עיצוב אחיד לכל הסניפים',
+      images: [
+        { src: 'assets/site-portfolio-gallery-image-8.webp', alt: 'סוכך ממותג — חזית' },
+        { src: 'assets/site-portfolio-gallery-image-8.webp', alt: 'סוכך ממותג — פרט' },
+        { src: 'assets/site-portfolio-gallery-image-8.webp', alt: 'סוכך ממותג — כניסה' }
+      ]
+    },
+    8: {
+      category: 'שלטי פוליגל',
+      title: 'שלט ארגז מואר',
+      desc: 'חנות צעצועים — נראות מושלמת יום ולילה',
+      images: [
+        { src: 'assets/site-service-gallery-image-9-1774812405998-fnfjby.webp', alt: 'שלט ארגז מואר — לילה' },
+        { src: 'assets/site-service-gallery-image-9-1774812405998-fnfjby.webp', alt: 'שלט ארגז מואר — יום' },
+        { src: 'assets/site-service-gallery-image-9-1774812405998-fnfjby.webp', alt: 'שלט ארגז מואר — קרוב' }
+      ]
+    }
+  };
+
+  var lb = document.getElementById('portfolio-lightbox');
+  var currentIndex = 0;
+  var currentImages = [];
+
+  function openLightbox(tileIndex) {
+    var data = GALLERY_DATA[tileIndex];
+    if (!data) return;
+    currentImages = data.images;
+    currentIndex = 0;
+
+    lb.querySelector('.plb-category-badge').textContent = data.category;
+    lb.querySelector('.plb-title').textContent = data.title;
+    lb.querySelector('.plb-desc').textContent = data.desc;
+
+    renderThumbs();
+    showImage(0);
+
+    lb.classList.remove('plb-hidden');
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Focus trap
+    setTimeout(function() { lb.querySelector('.plb-close').focus(); }, 50);
+  }
+
+  function closeLightbox() {
+    lb.classList.add('plb-hidden');
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function showImage(idx) {
+    if (idx < 0 || idx >= currentImages.length) return;
+    currentIndex = idx;
+    var img = lb.querySelector('.plb-main-img');
+    img.style.opacity = '0';
+    setTimeout(function() {
+      img.src = currentImages[idx].src;
+      img.alt = currentImages[idx].alt;
+      img.style.opacity = '1';
+    }, 120);
+    lb.querySelector('.plb-img-counter').textContent = (idx + 1) + ' / ' + currentImages.length;
+
+    // Update thumbs
+    var thumbs = lb.querySelectorAll('.plb-thumb');
+    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
+
+    // Nav buttons
+    lb.querySelector('.plb-prev').disabled = (idx === 0);
+    lb.querySelector('.plb-next').disabled = (idx === currentImages.length - 1);
+  }
+
+  function renderThumbs() {
+    var container = lb.querySelector('.plb-thumbs');
+    container.innerHTML = '';
+    currentImages.forEach(function(img, i) {
+      var t = document.createElement('img');
+      t.src = img.src;
+      t.alt = img.alt;
+      t.className = 'plb-thumb' + (i === 0 ? ' active' : '');
+      t.addEventListener('click', function() { showImage(i); });
+      container.appendChild(t);
+    });
+  }
+
+  // Add zoom icon + click handler to each tile
+  function initTiles() {
+    var tiles = document.querySelectorAll('.portfolio-tile');
+    tiles.forEach(function(tile) {
+      var idx = parseInt(tile.getAttribute('data-grid-item-index'), 10);
+      if (isNaN(idx) || !GALLERY_DATA[idx]) return;
+
+      // Add zoom icon
+      var wrap = tile.querySelector('.portfolio-tile-image-wrap');
+      if (wrap && !wrap.querySelector('.plb-zoom-icon')) {
+        var icon = document.createElement('div');
+        icon.className = 'plb-zoom-icon';
+        icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>';
+        wrap.appendChild(icon);
+      }
+
+      tile.addEventListener('click', function(e) {
+        // Don't interfere with editor controls
+        if (e.target.closest('[data-zappy-zoom-wrapper]') && window.__ZAPPY_EDITOR__) return;
+        openLightbox(idx);
+      });
+    });
+  }
+
+  // Lightbox controls
+  lb.querySelector('.plb-close').addEventListener('click', closeLightbox);
+  lb.querySelector('.plb-backdrop').addEventListener('click', closeLightbox);
+  lb.querySelector('.plb-prev').addEventListener('click', function() { showImage(currentIndex - 1); });
+  lb.querySelector('.plb-next').addEventListener('click', function() { showImage(currentIndex + 1); });
+
+  // Keyboard nav
+  document.addEventListener('keydown', function(e) {
+    if (lb.style.display === 'none' || lb.classList.contains('plb-hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') showImage(currentIndex - 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') showImage(currentIndex + 1);
+  });
+
+  // Init on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiles);
+  } else {
+    initTiles();
+  }
+
+  // Re-init after dynamic changes (editor)
+  window.__initPortfolioLightbox = initTiles;
+})();
+</script>
+
 <section class="portfolio-transformation-section" data-layout-spec="תיק עבודות-transformation" dir="rtl">
   <div class="pts-container">
     <div class="pts-header">
