@@ -1,6 +1,4 @@
-# Fix Design — Generative Engine Optimization Map
-
-> Fix Design is a premium signage and branding solutions company based in Netanya, Israel, with over 20 years of industry experience. The brand exudes confidence, professionalism, and craftsmanship, offering a full spectrum of services from outdoor billboards and 3D illuminated signs to vehicle branding and construction site fencing. Their identity is built on trust, quality without compromise, and personalized service — guiding clients from the initial concept all the way through on-site installation. The visual brand language is bold and dynamic, combining vibrant pink, blue, and yellow against clean black and white backgrounds to create a striking, modern aesthetic that commands attention.
+# Business — Generative Engine Optimization Map
 
 ---
 
@@ -44,27 +42,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About Fix Design
-Fix Design is a premium signage and branding solutions company based in Netanya, Israel, with over 20 years of industry experience. The brand exudes confidence, professionalism, and craftsmanship, offering a full spectrum of services from outdoor billboards and 3D illuminated signs to vehicle branding and construction site fencing. Their identity is built on trust, quality without compromise, and personalized service — guiding clients from the initial concept all the way through on-site installation. The visual brand language is bold and dynamic, combining vibrant pink, blue, and yellow against clean black and white backgrounds to create a striking, modern aesthetic that commands attention.
-
-## Services/Products
-- שלטי חוצות
-- שלטים תלת מימד מוארים ולא מוארים
-- שלטי פוליגל
-- שלטי PVC
-- מיתוג רכבים
-- מדבקות ויניל לחנויות
-- מיתוג זכוכיות
-- שמשוניות
-- סוככים
-- גידור לאתרי בנייה
-
-## Target Audience
-עסקים המחפשים פתרונות שילוט ומיתוג
-
-## Industry
-שילוט, מיתוג ועיצוב גרפי
-
+## About Business
 ---
 
 # Additional Resources
