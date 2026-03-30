@@ -1889,6 +1889,254 @@
   <div class="portfolio-cta-accent-line portfolio-cta-accent-blue" aria-hidden="true"></div>
   <div class="portfolio-cta-accent-line portfolio-cta-accent-yellow" aria-hidden="true"></div>
 </section>
+  <!-- PORTFOLIO LIGHTBOX MODAL -->
+  <div id="plb-overlay" role="dialog" aria-modal="true" aria-label="גלריית תמונות">
+    <div class="plb-modal">
+      <div class="plb-header">
+        <div class="plb-header-text">
+          <span class="plb-category-label" id="plb-cat-label">קטגוריה</span>
+          <h2 class="plb-category-title" id="plb-cat-title">שם הפרויקט</h2>
+        </div>
+        <button class="plb-close-btn" id="plb-close" aria-label="סגור">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="plb-main-image-wrap" id="plb-main-wrap">
+        <button class="plb-nav-btn plb-nav-prev" id="plb-prev" aria-label="הקודם">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <img id="plb-main-img" src="" alt="" />
+        <div class="plb-counter" id="plb-counter">1 / 1</div>
+        <div class="plb-caption" id="plb-caption"></div>
+        <button class="plb-nav-btn plb-nav-next" id="plb-next" aria-label="הבא">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+      <div class="plb-thumbs" id="plb-thumbs"></div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    // ============================================================
+    // PORTFOLIO LIGHTBOX — CATEGORY GALLERIES
+    // To add/change images: edit the "images" arrays below.
+    // Each item: { src, caption }
+    // ============================================================
+    var galleries = {
+      "שלטים מוארים": {
+        label: "שלטים מוארים",
+        title: "שלטים תלת מימד מוארים",
+        images: [
+          { src: "assets/site-service-gallery-image-1-1774854847797-wyjkde.webp", caption: "שלט תלת מימד מואר — חנות קוסמטיקה, עלייה של 40% בנראות" },
+          { src: "assets/site-portfolio-gallery-image-9.webp", caption: "שלט LED נאון — מסעדה בתל אביב" },
+          { src: "assets/site-portfolio-lighting-1.webp", caption: "אותיות מוארות — חנות אופנה" }
+        ]
+      },
+      "מיתוג רכבים": {
+        label: "מיתוג רכבים",
+        title: "מיתוג רכבים וצי",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-2.webp", caption: "מיתוג ניידת עסקית — חברת שירותים, מיתוג מלא לצי רכבים" },
+          { src: "assets/site-portfolio-vehicle-2.webp", caption: "רכב פרטי ממותג — ציפוי ויניל מלא" },
+          { src: "assets/site-portfolio-vehicle-3.webp", caption: "רכב מסחרי — עיטוף גרפי צדדי" }
+        ]
+      },
+      "שלטי חוצות": {
+        label: "שלטי חוצות",
+        title: "שלטי חוצות גדול פורמט",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-3.webp", caption: "שלט חוצות על כביש מהיר — חשיפה יומית של 50,000 נהגים" },
+          { src: "assets/site-portfolio-billboard-2.webp", caption: "שלט עצום על גשר — קמפיין לאומי" },
+          { src: "assets/site-portfolio-billboard-3.webp", caption: "שלט LED דיגיטלי — מרכז עסקים" }
+        ]
+      },
+      "מיתוג זכוכיות": {
+        label: "מיתוג זכוכיות",
+        title: "ויניל ומיתוג חלונות ראווה",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-4.webp", caption: "ויניל ומיתוג חלונות ראווה — בוטיק אופנה" },
+          { src: "assets/site-portfolio-glass-2.webp", caption: "פרסום על זכוכית — בנק" },
+          { src: "assets/site-portfolio-glass-3.webp", caption: "מדבקות שמשות — משרדי הייטק" }
+        ]
+      },
+      "גידור אתרי בנייה": {
+        label: "גידור אתרי בנייה",
+        title: "גידור ממותג לאתרי בנייה",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-5.webp", caption: "גידור ממותג — קבלן ראשי, פרויקט נדל\"ן יוקרתי" },
+          { src: "assets/site-portfolio-fence-2.webp", caption: "גידור הדפסה ענקית — פרויקט מגדל" },
+          { src: "assets/site-portfolio-fence-3.webp", caption: "מיתוג אתר — חברת קבלנות" }
+        ]
+      },
+      "שלטים תלת מימד": {
+        label: "שלטים תלת מימד",
+        title: "אותיות תלת מימד מתכת",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-6.webp", caption: "אותיות תלת מימד מתכת — מסעדה, מראה יוקרתי" },
+          { src: "assets/site-portfolio-3d-2.webp", caption: "אותיות אלומיניום — מלון בוטיק" },
+          { src: "assets/site-portfolio-3d-3.webp", caption: "לוגו תלת מימד — חברת נדל\"ן" }
+        ]
+      },
+      "שלטי PVC": {
+        label: "שלטי PVC",
+        title: "שלטי PVC למשרדים ועסקים",
+        images: [
+          { src: "assets/site-service-gallery-image-7-1774812632702-omtzki.webp", caption: "שלטי PVC — חברת הייטק, מיתוג פנים מקצועי" },
+          { src: "assets/site-portfolio-pvc-2.webp", caption: "שלט PVC חוץ — כניסת מפעל" },
+          { src: "assets/site-portfolio-pvc-3.webp", caption: "לוח מודעות PVC — מרכז מסחרי" }
+        ]
+      },
+      "סוכך": {
+        label: "סוככים ממותגים",
+        title: "סוכך ממותג לעסקים",
+        images: [
+          { src: "assets/site-portfolio-gallery-image-8.webp", caption: "סוכך ממותג — בית קפה, עיצוב ייחודי" },
+          { src: "assets/site-portfolio-awning-2.webp", caption: "סוכך בד מודפס — מסעדה" },
+          { src: "assets/site-portfolio-awning-3.webp", caption: "ויזר מתקפל ממותג — חנות" }
+        ]
+      }
+    };
+
+    // Default fallback for unknown tags — use the tile's own image
+    function getGalleryForTag(tag, fallbackSrc, fallbackCaption) {
+      // Try exact match
+      if (galleries[tag]) return galleries[tag];
+      // Try partial match
+      for (var k in galleries) {
+        if (tag.indexOf(k) !== -1 || k.indexOf(tag) !== -1) return galleries[k];
+      }
+      // Fallback: single-image gallery
+      return {
+        label: tag,
+        title: tag,
+        images: [{ src: fallbackSrc, caption: fallbackCaption }]
+      };
+    }
+
+    // ---- State ----
+    var currentGallery = null;
+    var currentIndex  = 0;
+    var overlay   = document.getElementById('plb-overlay');
+    var mainImg   = document.getElementById('plb-main-img');
+    var catLabel  = document.getElementById('plb-cat-label');
+    var catTitle  = document.getElementById('plb-cat-title');
+    var thumbsEl  = document.getElementById('plb-thumbs');
+    var captionEl = document.getElementById('plb-caption');
+    var counterEl = document.getElementById('plb-counter');
+
+    function openLightbox(gallery, startIndex) {
+      currentGallery = gallery;
+      currentIndex   = startIndex || 0;
+      catLabel.textContent = gallery.label;
+      catTitle.textContent = gallery.title;
+      buildThumbs();
+      showImage(currentIndex);
+      overlay.classList.add('plb-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('plb-open');
+      document.body.style.overflow = '';
+    }
+
+    function showImage(idx) {
+      if (!currentGallery) return;
+      var imgs = currentGallery.images;
+      if (idx < 0) idx = imgs.length - 1;
+      if (idx >= imgs.length) idx = 0;
+      currentIndex = idx;
+
+      mainImg.classList.add('plb-img-fade');
+      setTimeout(function() {
+        mainImg.src = imgs[idx].src;
+        mainImg.alt = imgs[idx].caption || '';
+        mainImg.classList.remove('plb-img-fade');
+      }, 120);
+
+      captionEl.textContent = imgs[idx].caption || '';
+      counterEl.textContent = (idx + 1) + ' / ' + imgs.length;
+
+      // Update thumb active state
+      var thumbs = thumbsEl.querySelectorAll('.plb-thumb');
+      thumbs.forEach(function(t, i) {
+        t.classList.toggle('plb-thumb-active', i === idx);
+      });
+      // Scroll active thumb into view
+      if (thumbs[idx]) {
+        thumbs[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      // Hide nav arrows if only 1 image
+      var navBtns = overlay.querySelectorAll('.plb-nav-btn');
+      navBtns.forEach(function(b) {
+        b.style.display = imgs.length > 1 ? '' : 'none';
+      });
+    }
+
+    function buildThumbs() {
+      thumbsEl.innerHTML = '';
+      currentGallery.images.forEach(function(img, i) {
+        var t = document.createElement('div');
+        t.className = 'plb-thumb';
+        t.innerHTML = '<img src="' + img.src + '" alt="' + (img.caption || '') + '" loading="lazy">';
+        t.addEventListener('click', function() { showImage(i); });
+        thumbsEl.appendChild(t);
+      });
+      // Hide thumbs bar if only 1 image
+      thumbsEl.style.display = currentGallery.images.length > 1 ? '' : 'none';
+    }
+
+    // ---- Event Listeners ----
+    document.getElementById('plb-close').addEventListener('click', closeLightbox);
+    document.getElementById('plb-prev').addEventListener('click', function() { showImage(currentIndex + 1); });
+    document.getElementById('plb-next').addEventListener('click', function() { showImage(currentIndex - 1); });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!overlay.classList.contains('plb-open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   showImage(currentIndex - 1);
+      if (e.key === 'ArrowRight')  showImage(currentIndex + 1);
+    });
+
+    // ---- Attach click to each portfolio tile ----
+    function attachTileHandlers() {
+      var tiles = document.querySelectorAll('.portfolio-tile');
+      tiles.forEach(function(tile) {
+        tile.addEventListener('click', function(e) {
+          // Get the tag label from this tile
+          var tagEl = tile.querySelector('.portfolio-tile-tag');
+          var tag   = tagEl ? tagEl.textContent.trim() : '';
+
+          // Get fallback image src from the tile's first img
+          var imgEl = tile.querySelector('img');
+          var fallbackSrc = imgEl ? imgEl.src : '';
+
+          // Get fallback caption from tile title
+          var titleEl = tile.querySelector('.portfolio-tile-title');
+          var resultEl = tile.querySelector('.portfolio-tile-result');
+          var fallbackCaption = (titleEl ? titleEl.textContent : '') + (resultEl ? ' — ' + resultEl.textContent : '');
+
+          var gallery = getGalleryForTag(tag, fallbackSrc, fallbackCaption);
+          openLightbox(gallery, 0);
+        });
+      });
+    }
+
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachTileHandlers);
+    } else {
+      attachTileHandlers();
+    }
+
+  })();
+  </script>
   </main>
   
   <footer class="site-footer" dir="rtl">
